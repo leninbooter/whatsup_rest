@@ -35,6 +35,15 @@ class DbHandler {
         return $places;
 	}
 	
+		public function getEventsFrom($place_id, $datetime) {
+		$stmt = $this->conn->prepare("CALL get_events_from(?,?);");
+        $stmt->bind_param("is", $place_id, $datetime);
+        $stmt->execute();
+        $places = $stmt->get_result();
+        $stmt->close();		
+        return $places;
+	}
+	
 }
  
 ?>
